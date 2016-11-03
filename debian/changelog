@@ -1,8 +1,9 @@
-grub2 (2.02~beta2-36ubuntu3.2bb1) UNRELEASED; urgency=medium
+grub2 (2.02~beta2-36ubuntu3.2bb2) UNRELEASED; urgency=medium
 
   * Balabit patched version
+  * Balabit patched version
 
- -- Balabit Platform Team <devnull@dev.null>  Thu, 03 Nov 2016 12:52:44 +0100
+ -- Balabit Platform Team <devnull@dev.null>  Thu, 03 Nov 2016 13:27:30 +0100
 
 grub2 (2.02~beta2-36ubuntu3.2) xenial; urgency=medium
 
