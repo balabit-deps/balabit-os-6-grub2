@@ -1,3 +1,150 @@
+grub2 (2.02~beta2-36ubuntu3.16) xenial; urgency=medium
+
+  [ dann frazier ]
+  * Use EFI_SIMPLE_TEXT_INPUT_EX to support key combinations.
+    (LP: #722950)
+
+  [ Mathieu Trudel-Lapierre ]
+  * util/grub-install.c: Use MokManager EFI binary name without
+    the .signed extension now that shim handles signing via sbsigntool
+    natively. (LP: #1708245)
+    - debian/patches/install_signed.patch
+  * debian/control: Breaks shim << 13 due to the renamed MokManager binary.
+
+ -- dann frazier <dannf@ubuntu.com>  Wed, 10 Jan 2018 17:04:34 -0700
+
+grub2 (2.02~beta2-36ubuntu3.15) xenial; urgency=medium
+
+  [ Ike Panhc ]
+  * Fix grub crash when exit on arm64-platform. (LP: #1731241)
+
+  [ Mathieu Trudel-Lapierre ]
+  * Cherry-pick upstream patch to change the default TSC calibration method
+    to pmtimer on EFI systems (LP: #1734278)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 11 Dec 2017 10:25:22 -0500
+
+grub2 (2.02~beta2-36ubuntu3.14) xenial; urgency=medium
+
+  * Add grub2/update_nvram template to allow users to disable NVRAM
+    updates during package upgrades (LP: #1642298).
+
+ -- dann frazier <dannf@ubuntu.com>  Thu, 14 Sep 2017 16:13:39 -0600
+
+grub2 (2.02~beta2-36ubuntu3.13) xenial; urgency=medium
+
+  * Fix EFIPersistentMemory (PMEM) support; incorrectly handled as "standard"
+    reserved memory without really marking it reserved: (LP: #1716424)
+    - debian/patches/git_pmem_really_mark_mem_reserved_3d2c8048.patch
+    - debian/patches/git_pmem_translate_persistent_type_76ce1de7.patch
+    - debian/patches/git_pmem_mmap_handle_pmem_c79c59f1.patch
+    - debian/patches/git_pmem_efiemu_handle_pmem_ae3b83a4.patch
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Sun, 10 Sep 2017 20:08:16 -0400
+
+grub2 (2.02~beta2-36ubuntu3.12) xenial; urgency=medium
+
+  * debian/patches: Rework linuxefi/SecureBoot support and sync with upstream
+    SB patch set: (LP: #1696599)
+    - linuxefi_backport_arm64.patch: backport basic arm64 chainload/linux
+      command support from 17.04.
+    - linuxefi_arm_sb_support.patch: add Secure Boot support for arm for its
+      chainloader.
+    - linuxefi_fix_validation_race.patch: Fix a race in validating images.
+    - linuxefi_chainloader_path.patch: honor the starting path for grub, so
+      images do not need to be started from $root.
+    - linuxefi_chainloader_sb.patch: Fix some more issues in chainloader use
+      when Secure Boot is enabled.
+    - linuxefi_loaders_enforce_sb.patch: Enforce Secure Boot policy for all
+      loaders: don't load the commands when Secure Boot is enabled.
+    - linuxefi_re-enable_linux_cmd.patch: Since we rely on the linux and
+      initrd commands to automatically hand-off to linuxefi/initrdefi; re-
+      enable the linux loader.
+    - linuxefi_chainloader_pe_fixes.patch: PE parsing fixes for chainloading
+      "special" PE images, such as Windows'.
+    - linuxefi_rework_non-sb_cases.patch: rework cases where Secure Boot is
+      disabled or shim validation is disabled so loading works as EFI binaries
+      when it is supposed to.
+    - Removed linuxefi_require_shim.patch; superseded by the above.
+      (LP: #1689687)
+  * debian/patches/git_tsc_use_alt_delay_sources_d43a5ee6.patch: refreshed.
+  * debian/patches/arm64-set-correct-length-of-device-path-end-entry.patch:
+    dropped; included in linuxefi_backport_arm64.patch.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Thu, 08 Jun 2017 10:16:17 -0700
+
+grub2 (2.02~beta2-36ubuntu3.11) xenial; urgency=medium
+
+  * Fix syntax error in debian/postinst.in.  (LP #1692181)
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Sat, 20 May 2017 12:59:17 -0700
+
+grub2 (2.02~beta2-36ubuntu3.10) xenial; urgency=medium
+
+  * debian/patches/install_signed.patch: don't install fb$arch.efi; it breaks
+    "removable" installs where files are all installed to /EFI/BOOT; and it
+    also doesn't belong in the /EFI/ubuntu path for the default case. Fallback
+    install simply needs more work and isn't ready for SRU. (LP: #1684341)
+  * debian/postinst.in: clean up fb$arch.efi.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 19 May 2017 16:54:14 -0400
+
+grub2 (2.02~beta2-36ubuntu3.9) xenial; urgency=medium
+
+  * debian/patches/install_signed.patch: update to use the new names for the
+    shim binary (shim$arch), MokManager (mm$arch) and add fallback (fb$arch).
+    (LP: #1637290)
+  * debian/control: Breaks shim (<< 0.9+1474479173.6c180c6-0ubuntu1~) for the
+    renamed EFI binaries.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 08 Nov 2016 14:42:24 -0500
+
+grub2 (2.02~beta2-36ubuntu3.8) xenial; urgency=medium
+
+  * debian/patches/support_initrd-less_boot.patch: Added knobs to allow
+    non-initrd boot config. Thanks Chris Glass! (LP: #1640878)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 01 Mar 2017 12:36:16 -0500
+
+grub2 (2.02~beta2-36ubuntu3.7) xenial; urgency=medium
+
+  [ Mauricio Faria de Oliveira ]
+  * Disable os-prober for ppc64el on the PowerNV platform, to reduce the
+    number of entries/clutter from other OSes in Petitboot (LP: #1447500)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 11 Jan 2017 19:07:05 -0500
+
+grub2 (2.02~beta2-36ubuntu3.6) xenial; urgency=medium
+
+  * Fix support for IPv6 PXE booting under UEFI: (LP: #1229458)
+    - grub_add_grub_env_set_net_property.patch: add grub_env_set_net_property.
+    - misc-fix-invalid-char-strtol.patch: fix strto*l methods invalid chars.
+    - net_read_bracketed_ipv6_addr.patch: read bracketed IPv6 addresses.
+    - bootp_new_net_bootp6_command.patch: add new bootp6 commands.
+    - efinet_uefi_ipv6_pxe_support.patch: teach efinet to allow bootp6.
+    - bootp_process_dhcpack_http_boot.patch: process DHCPACK, support HTTP.
+    - efinet_set_network_from_uefi_devpath.patch: configure network from the
+      devpath provided by the UEFI firmware.
+    - efinet_set_dns_from_uefi_proto.patch: set DNS nameservers and search
+      domains from the UEFI protocol. 
+  * Fix booting on Hyper-V gen 2 VMs due to the lack of PIT there; we can deal
+    with this by using other timers when PIT aren't available. (LP: #1519836)
+    - debian/patches/git_tsc_use_alt_delay_sources_d43a5ee6.patch
+    - debian/patches/git_split_pmtimer_wait_tsc_d9a3bfea.patch
+    - debian/patches/git_fix_tsc_calibration_pit_a03c1034.patch
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Thu, 15 Sep 2016 13:56:55 -0400
+
+grub2 (2.02~beta2-36ubuntu3.3) xenial; urgency=medium
+
+  * debian/patches/ip6_send_router_solicitation_7c4b6b7b.patch: handle long
+    RA intervals by explicitly sending a SOLICIT.
+  * debian/patches/ip6_fix_routing_eb9f401f.patch: fix IPv6 routing; we should
+    be able to talk to things outside of link-local addresses; to do this,
+    allow specifying a gateway and interface. (LP: #1229458)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 03 Aug 2016 16:46:41 -0400
+
 grub2 (2.02~beta2-36ubuntu3.2) xenial; urgency=medium
 
   * Add loopback and squash4 modules to the signed EFI images.  LP: #1604499.
