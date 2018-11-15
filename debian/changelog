@@ -1,3 +1,9 @@
+grub2 (2.02~beta2-36ubuntu3.19bb1) xenial; urgency=medium
+
+  * Balabit patched version
+
+ -- Balabit Platform Team <devnull@dev.null>  Thu, 15 Nov 2018 14:15:41 +0100
+
 grub2 (2.02~beta2-36ubuntu3.19) xenial; urgency=medium
 
   * debian/patches/0001-i386-linux-Add-support-for-ext_lfb_base.patch:
