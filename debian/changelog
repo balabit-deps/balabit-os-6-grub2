@@ -1,3 +1,9 @@
+grub2 (2.02~beta2-36ubuntu3.21bb1) xenial; urgency=medium
+
+  * Balabit patched version
+
+ -- Balabit Platform Team <devnull@dev.null>  Sat, 06 Apr 2019 04:24:45 +0200
+
 grub2 (2.02~beta2-36ubuntu3.21) xenial; urgency=medium
 
   * debian/patches/squash4-fix-fragments-and-sparse-files.patch: Cherry-pick
