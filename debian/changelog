@@ -1,3 +1,9 @@
+grub2 (2.02~beta2-36ubuntu3.23bb1) xenial; urgency=medium
+
+  * Balabit patched version
+
+ -- Balabit Platform Team <devnull@dev.null>  Sat, 16 Nov 2019 04:22:11 +0100
+
 grub2 (2.02~beta2-36ubuntu3.23) xenial; urgency=medium
 
   * d/p/fix_booting_for_large_root_volumes.patch: Cherry pick upstream
