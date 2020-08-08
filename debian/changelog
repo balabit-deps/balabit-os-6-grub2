@@ -1,3 +1,9 @@
+grub2 (2.02~beta2-36ubuntu3.27bb1) xenial; urgency=medium
+
+  * Balabit patched version
+
+ -- Balabit Platform Team <devnull@dev.null>  Sat, 08 Aug 2020 04:23:15 +0200
+
 grub2 (2.02~beta2-36ubuntu3.27) xenial; urgency=medium
 
   * debian/postinst.in: Avoid calling grub-install on upgrade of the grub-pc
