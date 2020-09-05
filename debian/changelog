@@ -1,3 +1,14 @@
+grub2 (2.02~beta2-36ubuntu3.28) xenial; urgency=medium
+
+  * debian/patches/ubuntu-flavour-order.patch:
+    - Add a (hidden) GRUB_FLAVOUR_ORDER setting that can mark certain kernel
+      flavours as preferred, and specify an order between those preferred
+      flavours (LP: #1882663)
+  * debian/patches/ubuntu-recovery-dis_ucode_ldr.patch:
+    - Pass dis_ucode_ldr to kernel for recovery mode (LP: #1831789)
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 24 Aug 2020 10:54:59 +0200
+
 grub2 (2.02~beta2-36ubuntu3.27bb1) xenial; urgency=medium
 
   * Balabit patched version
