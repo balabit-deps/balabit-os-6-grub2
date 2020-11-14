@@ -165,3 +165,5 @@ ubuntu-Update-the-linux-boot-protocol-version-check.patch
 0106-efilinux-Fix-integer-overflows-in-grub_cmd_initrd.patch
 ubuntu-flavour-order.patch
 ubuntu-recovery-dis_ucode_ldr.patch
+ubuntu-linuxefi-arm64-set-base-addr.patch
+tftp-rollover-block-counter.patch
