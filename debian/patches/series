@@ -168,3 +168,5 @@ ubuntu-flavour-order.patch
 ubuntu-recovery-dis_ucode_ldr.patch
 ubuntu-linuxefi-arm64-set-base-addr.patch
 tftp-rollover-block-counter.patch
+R_X86_64_PLT32.patch
+arm64-Add-support-for-relocations-needed-for-linaro-gcc.patch
