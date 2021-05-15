@@ -1,3 +1,9 @@
+grub2 (2.02~beta2-36ubuntu3.32bb1) xenial; urgency=medium
+
+  * Balabit patched version
+
+ -- Balabit Platform Team <devnull@dev.null>  Sat, 15 May 2021 04:37:13 +0200
+
 grub2 (2.02~beta2-36ubuntu3.32) xenial; urgency=medium
 
   * Cherrypick upstream commit to add support for
